@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exce_init_set_url">還沒有設定 URL，請使用 setUrl 設定之!</string>
+    <string name="exce_after_connect">請先執行過 actGet/actPost/actInvoke 後再執行此函式！</string>
+</resources>
