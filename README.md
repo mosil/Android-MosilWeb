@@ -25,8 +25,12 @@ mosilWeb.actHttp("post data", "query string");
 //Use HTTPS
 mosilWeb.actHttps("post data", "query string");
 
-/*
- *Static Method : Parser Data to Query String/JSON String
+//Get Response
+mosilWeb.getResponse();       //String
+mosilWeb.getResponseStatus(); //int, Http Status 
+
+/**
+ * Static Method : Parser Data to Query String/JSON String
  */
 //Query String
 MosilWeb.parseToQueryString(Map<String, Object>);
