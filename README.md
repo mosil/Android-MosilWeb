@@ -5,6 +5,34 @@ Mosil Web Tools for Connect to Web API or Web Resource of Android Project
 
 連線取得 Web API 以及資源用
 
+##Usage
+```java
+/**
+ * Basic
+ */
+MosilWeb mosilWeb = new MosilWeb(context);
+mosilWeb.setUrl("your host", "your path or method", ...);
+
+//Use GET
+mosilWeb.actGet("query string");
+
+//Use POST
+mosilWeb.actPost(ContentType, "post data");
+
+//Use HTTP
+mosilWeb.actHttp("post data", "query string");
+
+//Use HTTPS
+mosilWeb.actHttps("post data", "query string");
+
+/*
+ *Static Method : Parser Data to Query String/JSON String
+ */
+//Query String
+MosilWeb.parseToQueryString(Map<String, Object>);
+//JSON String
+MosilWeb.parseToJsonString(Map<String, Object>);
+```
 
 
 ##License
