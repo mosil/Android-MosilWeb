@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MosilWebInvoke</string>
+    <string name="app_name">MosilWebTools</string>
+    <string name="mosil_web_documentation">http://blog.mosil.biz/2013/02/mosilweb-documentation/</string>
     <string name="exce_init_set_url">還沒有設定 URL，請使用 setUrl 設定之!</string>
 	<string name="exce_after_connect">Please execut method: actGet/actPost/actInvoke, when you call this method!!</string>
 </resources>

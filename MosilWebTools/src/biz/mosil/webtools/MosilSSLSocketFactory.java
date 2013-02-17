@@ -1,9 +1,9 @@
 /*
- * Copyright (C) 2013 Mosil(http://mosil.biz>)
+ * Copyright (C) 2013 Mosil(http://mosil.biz)
  * 
  * The MID License (MIT);
  * 
- * 		http://opensource.org/licenses/MIT
+ *         http://opensource.org/licenses/MIT
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a 
  * copy of this software and associated documentation files (the "Software"), 
@@ -56,71 +56,71 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
 public class MosilSSLSocketFactory extends SSLSocketFactory {
-	private SSLContext mSSLContext = SSLContext.getInstance("TLS");
-	
-	public MosilSSLSocketFactory(KeyStore _truststore) throws 
-			NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
-		super(_truststore);
-		
-		TrustManager trustManager = new X509TrustManager() {
-			
-			@Override
-			public X509Certificate[] getAcceptedIssuers() {
-				return null;
-			}
-			
-			@Override
-			public void checkServerTrusted(X509Certificate[] _chain, String _authType)
-					throws CertificateException {
-				
-			}
-			
-			@Override
-			public void checkClientTrusted(X509Certificate[] _chain, String _authType)
-					throws CertificateException {
-				
-			}
-		};
-		
-		mSSLContext.init(null, new TrustManager[]{ trustManager }, null);
-	}
+    private SSLContext mSSLContext = SSLContext.getInstance("TLS");
+    
+    public MosilSSLSocketFactory(KeyStore _truststore) throws 
+            NoSuchAlgorithmException, KeyManagementException, KeyStoreException, UnrecoverableKeyException {
+        super(_truststore);
+        
+        TrustManager trustManager = new X509TrustManager() {
+            
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+            
+            @Override
+            public void checkServerTrusted(X509Certificate[] _chain, String _authType)
+                    throws CertificateException {
+                
+            }
+            
+            @Override
+            public void checkClientTrusted(X509Certificate[] _chain, String _authType)
+                    throws CertificateException {
+                
+            }
+        };
+        
+        mSSLContext.init(null, new TrustManager[]{ trustManager }, null);
+    }
 
-	@Override
-	public Socket createSocket() throws IOException {
-		return mSSLContext.getSocketFactory().createSocket();
-	}
+    @Override
+    public Socket createSocket() throws IOException {
+        return mSSLContext.getSocketFactory().createSocket();
+    }
 
-	@Override
-	public Socket createSocket(Socket _socket, String _host, int _port, boolean _autoClose) throws 
-			IOException, UnknownHostException {
-		return mSSLContext.getSocketFactory().createSocket(_socket, _host, _port, _autoClose);
-	}
-	
-	public static HttpClient getHttpClient(HttpParams _params){
-		try{
-			KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-			trustStore.load(null, null);
-			
-			SSLSocketFactory factory = new MosilSSLSocketFactory(trustStore);
-			factory.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-			
-			HttpProtocolParams.setVersion(_params, HttpVersion.HTTP_1_1);
-			HttpProtocolParams.setContentCharset(_params, HTTP.UTF_8);
-			
-			SchemeRegistry registry = new SchemeRegistry();
-			registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), MosilWebConf.HTTP_PORT));
-			registry.register(new Scheme("https", factory, MosilWebConf.SSL_PORT));
-			
-			ClientConnectionManager clientConnectionManager = new ThreadSafeClientConnManager(_params, registry);
-			
-			return new DefaultHttpClient(clientConnectionManager, _params);
-			
-		} catch (Exception _ex) {
-			return new DefaultHttpClient();
-		}
-	}
-	
-	public static HttpClient getHttpClient(){
-		return getHttpClient(new BasicHttpParams());
-	}
+    @Override
+    public Socket createSocket(Socket _socket, String _host, int _port, boolean _autoClose) throws 
+            IOException, UnknownHostException {
+        return mSSLContext.getSocketFactory().createSocket(_socket, _host, _port, _autoClose);
+    }
+    
+    public static HttpClient getHttpClient(HttpParams _params){
+        try{
+            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            trustStore.load(null, null);
+            
+            SSLSocketFactory factory = new MosilSSLSocketFactory(trustStore);
+            factory.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+            
+            HttpProtocolParams.setVersion(_params, HttpVersion.HTTP_1_1);
+            HttpProtocolParams.setContentCharset(_params, HTTP.UTF_8);
+            
+            SchemeRegistry registry = new SchemeRegistry();
+            registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), MosilWebConf.HTTP_PORT));
+            registry.register(new Scheme("https", factory, MosilWebConf.SSL_PORT));
+            
+            ClientConnectionManager clientConnectionManager = new ThreadSafeClientConnManager(_params, registry);
+            
+            return new DefaultHttpClient(clientConnectionManager, _params);
+            
+        } catch (Exception _ex) {
+            return new DefaultHttpClient();
+        }
+    }
+    
+    public static HttpClient getHttpClient(){
+        return getHttpClient(new BasicHttpParams());
+    }
 }

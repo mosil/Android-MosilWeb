@@ -1,9 +1,9 @@
 /*
- * Copyright (C) 2013 Mosil(http://mosil.biz>)
+ * Copyright (C) 2013 Mosil(http://mosil.biz)
  * 
  * The MID License (MIT);
  * 
- * 		http://opensource.org/licenses/MIT
+ *         http://opensource.org/licenses/MIT
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a 
  * copy of this software and associated documentation files (the "Software"), 
@@ -30,30 +30,29 @@ import android.annotation.SuppressLint;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressLint("DefaultLocale") 
 public class MosilWebHelper {
-	@SuppressLint("DefaultLocale") 
-	public static boolean isFindHttpAtPrefixs(String _url){
-		Pattern pattern = Pattern.compile("^http://", Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(_url.toLowerCase());
-		return matcher.find();
-	}
-	
-	@SuppressLint("DefaultLocale") 
-	public static boolean isFindHttpsAtPrefixs(String _url){
-		Pattern pattern = Pattern.compile("^https://", Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(_url.toLowerCase());
-		return matcher.find();
-	}
-	
-	public static String chkHttpsAtPrefixs(String _url){
-		if(isFindHttpAtPrefixs(_url)){
-			return _url.replace("(?i)" + "http://", "");
-		} else if(isFindHttpsAtPrefixs(_url)){
-			return _url.replace("(?i)" + "https://", "");
-		}
-		return (isFindHttpAtPrefixs(_url))
- 				? _url.replace("http://", "")
- 				: _url;
-		
-	}
+    public static boolean isFindHttpAtPrefixs(String _url){
+        Pattern pattern = Pattern.compile("^http://", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(_url.toLowerCase());
+        return matcher.find();
+    }
+    
+    public static boolean isFindHttpsAtPrefixs(String _url){
+        Pattern pattern = Pattern.compile("^https://", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(_url.toLowerCase());
+        return matcher.find();
+    }
+    
+    public static String chkHttpsAtPrefixs(String _url){
+        if(isFindHttpAtPrefixs(_url)){
+            return _url.replace("(?i)" + "http://", "");
+        } else if(isFindHttpsAtPrefixs(_url)){
+            return _url.replace("(?i)" + "https://", "");
+        }
+        return (isFindHttpAtPrefixs(_url))
+                 ? _url.replace("http://", "")
+                 : _url;
+        
+    }
 }
