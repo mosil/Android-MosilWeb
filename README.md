@@ -5,6 +5,10 @@ Mosil Web Tools for Connect to Web API or Web Resource of Android Project
 
 連線取得 Web API 以及資源用
 
+##Documentation
+[Android Library – MosilWeb 說明文件](http://blog.mosil.biz/2013/02/mosilweb-documentation/)
+
+
 ##Usage
 ```java
 /**
