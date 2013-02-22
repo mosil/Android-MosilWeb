@@ -225,9 +225,9 @@ public class MosilWeb {
         try {
             mHttpResponse = httpClient.execute(httpGet);
         } catch (ClientProtocolException _ex) {
-            throw new RuntimeException("Client Protocol Exception: " + _ex.toString());
+        	Log.e(TAG, "Client Protocol Exception: " + _ex.toString());
         } catch (IOException _ex) {
-            throw new RuntimeException("IO Exception: " + _ex.toString());
+        	Log.e(TAG, "IO Exception: " + _ex.toString());
         }
         
         return this;
@@ -318,9 +318,9 @@ public class MosilWeb {
                     : new DefaultHttpClient(mHttpParams).execute(httpPost, mHttpContext);
             
         } catch (ClientProtocolException _ex) {
-            throw new RuntimeException("Client Portocol Exception: " + _ex.toString());
+        	Log.e(TAG, "Client Protocol Exception: " + _ex.toString());
         } catch (IOException _ex) {
-            throw new RuntimeException("IO Exception: " + _ex.toString());
+        	Log.e(TAG, "IO Exception: " + _ex.toString());
         }
         
         return this;
@@ -359,9 +359,9 @@ public class MosilWeb {
             }
             
         } catch (MalformedURLException _ex) {
-            throw new RuntimeException("Malformed URL Exception: " + _ex.toString());
+        	Log.e("getInputStream", "Malformed URL Exception: " + _ex.toString());
         } catch (IOException _ex) {
-            throw new RuntimeException("IO Exception: " + _ex.toString());
+        	Log.e("getInputStream", "IO Exception: " + _ex.toString());
         }
         return result;
     }
