@@ -36,7 +36,6 @@ import java.net.URLConnection;
 import java.util.Map;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -67,6 +66,7 @@ public class MosilWeb {
     private String mHostName;
     private HttpParams mHttpParams;
     private HttpResponse mHttpResponse;
+    private String mResponse;
     private HttpContext mHttpContext;
     
     /**
@@ -166,17 +166,17 @@ public class MosilWeb {
      * @return    (String) Response Data，若是null則回傳空字串
      * */
     public String getResponse(){
-        String result = "";
-        if(mHttpResponse != null){
-            try {
-                result = EntityUtils.toString(mHttpResponse.getEntity());
-            } catch (ParseException _ex) {
-                Log.e(TAG, "Parse Response To String Error: " + _ex.toString());
-            } catch (IOException _ex) {
-                Log.e(TAG, _ex.toString());
-            }
-        }
-        return result;
+//        String result = "";
+//        if(mHttpResponse != null){
+//            try {
+//                result = EntityUtils.toString(mHttpResponse.getEntity());
+//            } catch (ParseException _ex) {
+//                Log.e(TAG, "Parse Response To String Error: " + _ex.toString());
+//            } catch (IOException _ex) {
+//                Log.e(TAG, _ex.toString());
+//            }
+//        }
+        return mResponse;
     }
     
     /**
@@ -224,6 +224,9 @@ public class MosilWeb {
         
         try {
             mHttpResponse = httpClient.execute(httpGet);
+            if(mHttpResponse != null){
+            	mResponse = EntityUtils.toString(mHttpResponse.getEntity());
+            }
         } catch (ClientProtocolException _ex) {
         	Log.e(TAG, "Client Protocol Exception: " + _ex.toString());
         } catch (IOException _ex) {
@@ -316,7 +319,9 @@ public class MosilWeb {
             mHttpResponse = (_isSSL)
                     ? MosilSSLSocketFactory.getHttpClient(mHttpParams).execute(httpPost, mHttpContext)
                     : new DefaultHttpClient(mHttpParams).execute(httpPost, mHttpContext);
-            
+            if(mHttpResponse != null){
+            	mResponse = EntityUtils.toString(mHttpResponse.getEntity());
+            }
         } catch (ClientProtocolException _ex) {
         	Log.e(TAG, "Client Protocol Exception: " + _ex.toString());
         } catch (IOException _ex) {
